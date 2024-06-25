@@ -1,11 +1,13 @@
 import { Router } from "express";
+import userRouter from "../modules/User/user.route";
+import TModuleRouters from "./index.interface";
 
 const router = Router();
 
-const moduleRoutes = [
+const moduleRoutes: TModuleRouters = [
   {
-    path: "/user",
-    route: "user",
+    path: "/auth",
+    route: userRouter,
   },
 ];
 
