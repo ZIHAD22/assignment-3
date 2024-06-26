@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -w",
-    "start": "node dist/server.js",
-    "dev": "nodemon dist/server.js"
+    "start": "set NODE_ENV=PROD&node dist/server.js",
+    "dev": "set NODE_ENV=DEV&nodemon dist/server.js"
   },
   "keywords": [],
   "author": "",
