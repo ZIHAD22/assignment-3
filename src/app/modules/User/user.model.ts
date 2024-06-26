@@ -22,11 +22,18 @@ const userSchema = new Schema<TUser>({
     type: String,
     enum: ["admin", "user"],
     required: true,
+    default: "user",
   },
   address: {
     type: String,
     required: true,
   },
+});
+
+userSchema.pre("save", function (next) {
+  const user = this;
+  user.password = "";
+  next();
 });
 
 const UserModel = model<TUser>("User", userSchema);
