@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import catchAsync from "../../util/catchAsync/catchAsync";
 import sendRes from "../../util/sendRes/sendRes";
-import { createUserDB } from "./user.service";
+import { createUserDB, loginUserDB } from "./user.service";
 
 const userSignUp: RequestHandler = catchAsync(async (req, res, next) => {
   const data = req.body;
@@ -10,10 +10,23 @@ const userSignUp: RequestHandler = catchAsync(async (req, res, next) => {
 
   sendRes({
     res,
-    message: "all ok",
-    statusCode: 200,
+    message: "User Created Successfully",
+    statusCode: 201,
     data: result,
   });
 });
 
-export { userSignUp };
+const userLogin: RequestHandler = catchAsync(async (req, res, next) => {
+  const data = req.body;
+
+  const result = await loginUserDB(data);
+
+  sendRes({
+    res,
+    message: "User Login Successfully",
+    statusCode: 201,
+    data: data,
+  });
+});
+
+export { userSignUp, userLogin };
