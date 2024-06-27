@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 type TUser = {
   name: string;
   email: string;
@@ -7,4 +9,11 @@ type TUser = {
   address: string;
 };
 
-export default TUser;
+interface IUserModel extends Model<TUser> {
+  isPasswordMatched(
+    plainTextPassword: string,
+    hashedPassword: string
+  ): Promise<boolean>;
+}
+
+export { TUser, IUserModel };

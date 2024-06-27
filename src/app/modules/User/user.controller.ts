@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import catchAsync from "../../util/catchAsync/catchAsync";
 import sendRes from "../../util/sendRes/sendRes";
 import { createUserDB, loginUserDB } from "./user.service";
+import CError from "../../error/CError";
 
 const userSignUp: RequestHandler = catchAsync(async (req, res, next) => {
   const data = req.body;
@@ -20,6 +21,10 @@ const userLogin: RequestHandler = catchAsync(async (req, res, next) => {
   const data = req.body;
 
   const result = await loginUserDB(data);
+
+  if (!result) {
+    throw new CError(500, "something went wrong");
+  }
 
   sendRes({
     res,
