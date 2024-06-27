@@ -2,6 +2,7 @@ import catchAsync from "../../util/catchAsync/catchAsync";
 import sendRes from "../../util/sendRes/sendRes";
 import {
   createFacilityDB,
+  deleteFacilityDB,
   getAllFacilityDB,
   updateFacilityDB,
 } from "./facility.service";
@@ -40,4 +41,15 @@ const updateFacility = catchAsync(async (req, res, next) => {
   });
 });
 
-export { createFacility, getAllFacility, updateFacility };
+const deleteFacility = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const result = await deleteFacilityDB(id);
+  sendRes({
+    res,
+    message: "Facility Deleted Successfully",
+    statusCode: 200,
+    data: result,
+  });
+});
+
+export { createFacility, getAllFacility, updateFacility, deleteFacility };

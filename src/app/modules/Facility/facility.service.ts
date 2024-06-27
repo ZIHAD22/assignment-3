@@ -24,4 +24,15 @@ const updateFacilityDB = async (payload: any) => {
   return result;
 };
 
-export { createFacilityDB, getAllFacilityDB, updateFacilityDB };
+const deleteFacilityDB = async (payload: string) => {
+  const result = await FacilityModel.findByIdAndUpdate(payload, {
+    isDeleted: true,
+  });
+};
+
+export {
+  createFacilityDB,
+  getAllFacilityDB,
+  updateFacilityDB,
+  deleteFacilityDB,
+};
