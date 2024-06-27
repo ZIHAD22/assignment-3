@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { createFacility } from "./facility.controller";
+import { createFacility, getAllFacility } from "./facility.controller";
 
 const facilityRouter = Router();
 
+facilityRouter.get("/", getAllFacility);
 facilityRouter.post("/", createFacility);
 
 export default facilityRouter;
