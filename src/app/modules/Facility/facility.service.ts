@@ -11,4 +11,17 @@ const createFacilityDB = async (payload: TFacility) => {
   return result;
 };
 
-export { createFacilityDB, getAllFacilityDB };
+const updateFacilityDB = async (payload: any) => {
+  const result = await FacilityModel.findByIdAndUpdate(
+    payload._id,
+    payload.data,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  console.log(result);
+  return result;
+};
+
+export { createFacilityDB, getAllFacilityDB, updateFacilityDB };

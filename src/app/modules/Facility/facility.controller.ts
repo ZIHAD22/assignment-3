@@ -1,6 +1,10 @@
 import catchAsync from "../../util/catchAsync/catchAsync";
 import sendRes from "../../util/sendRes/sendRes";
-import { createFacilityDB, getAllFacilityDB } from "./facility.service";
+import {
+  createFacilityDB,
+  getAllFacilityDB,
+  updateFacilityDB,
+} from "./facility.service";
 
 const getAllFacility = catchAsync(async (req, res, next) => {
   const result = await getAllFacilityDB();
@@ -24,4 +28,16 @@ const createFacility = catchAsync(async (req, res, next) => {
   });
 });
 
-export { createFacility, getAllFacility };
+const updateFacility = catchAsync(async (req, res, next) => {
+  const { _id } = req.params;
+  const data = req.body;
+  const result = await updateFacilityDB({ _id, data });
+  sendRes({
+    res,
+    message: "Facility Updated Successfully",
+    statusCode: 200,
+    data: result,
+  });
+});
+
+export { createFacility, getAllFacility, updateFacility };
