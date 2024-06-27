@@ -1,6 +1,7 @@
 import { Router } from "express";
 import userRouter from "../modules/User/user.route";
 import TModuleRouters from "./index.interface";
+import facilityRouter from "../modules/Facility/facility.route";
 
 const router = Router();
 
@@ -8,6 +9,10 @@ const moduleRoutes: TModuleRouters = [
   {
     path: "/auth",
     route: userRouter,
+  },
+  {
+    path: "/facility",
+    route: facilityRouter,
   },
 ];
 
