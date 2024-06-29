@@ -39,4 +39,20 @@ const fetchAllBookingsDB = async () => {
   return result;
 };
 
-export { createBookingDB, calculatePayAbleAmountDB, fetchAllBookingsDB };
+const cancelBookingsDB = async (id: string) => {
+  const result = await BookingModel.findByIdAndUpdate(
+    id,
+    {
+      isBooked: "canceled",
+    },
+    { new: true }
+  );
+  return result;
+};
+
+export {
+  createBookingDB,
+  calculatePayAbleAmountDB,
+  fetchAllBookingsDB,
+  cancelBookingsDB,
+};

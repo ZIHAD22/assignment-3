@@ -2,6 +2,7 @@ import catchAsync from "../../util/catchAsync/catchAsync";
 import sendRes from "../../util/sendRes/sendRes";
 import {
   calculatePayAbleAmountDB,
+  cancelBookingsDB,
   createBookingDB,
   fetchAllBookingsDB,
 } from "./booking.service";
@@ -32,4 +33,15 @@ const fetchAllBookings = catchAsync(async (req, res, next) => {
   });
 });
 
-export { createBooking, fetchAllBookings };
+const cancelBookings = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const result = await cancelBookingsDB(id);
+  sendRes({
+    res,
+    message: "Booking cancelled successfully",
+    statusCode: 200,
+    data: result,
+  });
+});
+
+export { createBooking, fetchAllBookings, cancelBookings };
