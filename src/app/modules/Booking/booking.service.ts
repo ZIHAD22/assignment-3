@@ -30,4 +30,13 @@ const createBookingDB = async (
   return result;
 };
 
-export { createBookingDB, calculatePayAbleAmountDB };
+// fetch all bookings
+const fetchAllBookingsDB = async () => {
+  const result = await BookingModel.find()
+    .populate("user")
+    .populate("facility");
+
+  return result;
+};
+
+export { createBookingDB, calculatePayAbleAmountDB, fetchAllBookingsDB };
