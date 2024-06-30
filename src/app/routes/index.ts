@@ -3,6 +3,7 @@ import userRouter from "../modules/User/user.route";
 import TModuleRouters from "./index.interface";
 import facilityRouter from "../modules/Facility/facility.route";
 import bookingRouter from "../modules/Booking/booking.route";
+import auth from "../middlewares/Auth/auth";
 
 const router = Router();
 
@@ -14,6 +15,7 @@ const moduleRoutes: TModuleRouters = [
   {
     path: "/facility",
     route: facilityRouter,
+    middleware: [auth("admin")],
   },
   {
     path: "/bookings",
@@ -21,6 +23,12 @@ const moduleRoutes: TModuleRouters = [
   },
 ];
 
-moduleRoutes.forEach((route) => router.use(route.path, route.route));
+moduleRoutes.forEach((route) => {
+  if (route.middleware) {
+    router.use(route.path, ...route.middleware, route.route);
+  } else {
+    router.use(route.path, route.route);
+  }
+});
 
 export default router;

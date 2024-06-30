@@ -20,6 +20,7 @@ const getAllFacility = catchAsync(async (req, res, next) => {
 
 const createFacility = catchAsync(async (req, res, next) => {
   const data = req.body;
+
   const result = await createFacilityDB(data);
   sendRes({
     res,

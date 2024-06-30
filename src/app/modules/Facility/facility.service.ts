@@ -7,7 +7,7 @@ const getAllFacilityDB = async () => {
 };
 
 const createFacilityDB = async (payload: TFacility) => {
-  const result = await FacilityModel.create(payload, { new: true });
+  const result = await FacilityModel.create(payload);
   return result;
 };
 

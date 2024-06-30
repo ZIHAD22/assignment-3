@@ -21,6 +21,18 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
         message: err?.message,
       },
     ];
+  } else if (
+    err?.name === "JsonWebTokenError" &&
+    err.message === "jwt malformed"
+  ) {
+    statusCode = err?.statusCode;
+    message = "Access Forbidden";
+    errorSources = [
+      {
+        path: "",
+        message: err?.message,
+      },
+    ];
   }
 
   return res.json({

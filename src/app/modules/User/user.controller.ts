@@ -26,8 +26,6 @@ const userLogin: RequestHandler = catchAsync(async (req, res, next) => {
     throw new CError(500, "something went wrong");
   }
 
-  console.log(token);
-
   sendRes({
     res,
     message: "User Login Successfully",
