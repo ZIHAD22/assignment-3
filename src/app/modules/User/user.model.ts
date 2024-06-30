@@ -42,10 +42,11 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.post("save", function (user, next) {
-  user.password = "";
-  next();
-});
+userSchema.methods.toJSON = function () {
+  const userObject = this.toObject();
+  delete userObject.password;
+  return userObject;
+};
 
 userSchema.statics.isPasswordMatched = async (plainPassword, hashPassword) => {
   return await bcrypt.compare(plainPassword, hashPassword);
