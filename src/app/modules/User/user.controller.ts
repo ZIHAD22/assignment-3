@@ -20,17 +20,20 @@ const userSignUp: RequestHandler = catchAsync(async (req, res, next) => {
 const userLogin: RequestHandler = catchAsync(async (req, res, next) => {
   const data = req.body;
 
-  const result = await loginUserDB(data);
+  const { token, userData } = await loginUserDB(data);
 
-  if (!result) {
+  if (!token) {
     throw new CError(500, "something went wrong");
   }
+
+  console.log(token);
 
   sendRes({
     res,
     message: "User Login Successfully",
-    statusCode: 201,
-    data: data,
+    statusCode: 200,
+    token,
+    data: userData,
   });
 });
 
