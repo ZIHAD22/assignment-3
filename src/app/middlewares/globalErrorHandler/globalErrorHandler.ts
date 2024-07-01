@@ -4,7 +4,7 @@ import { TErrorSources } from "./globalErrorHandler.interface";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
-  let message = "Something went wrong!";
+  let message = err.message ? err.message : "Something went wrong!";
   let errorSources: TErrorSources = [
     {
       path: "",

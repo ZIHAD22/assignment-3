@@ -10,9 +10,10 @@ import {
 const createBooking = catchAsync(async (req, res, next) => {
   const data = req.body;
   const { durationHours } = req.data;
+
   const totalPayableAmount = await calculatePayAbleAmountDB(
     data.facility,
-    durationHours
+    durationHours as number
   );
   const result = await createBookingDB(data, totalPayableAmount);
   sendRes({

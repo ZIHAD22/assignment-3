@@ -9,11 +9,22 @@ const auth = (...userRole: TUserRole[]): RequestHandler => {
   return catchAsync(async (req, res, next) => {
     const token = req.headers.authorization;
     if (!token) {
-      throw new CError(501, "You are not authorized!");
+      throw new CError(501, "Access forbidden !");
     }
 
-    const decoded = jwt.verify("token", JWT_ACCESS_SECRET) as JwtPayload;
+    const decoded = jwt.verify(token, JWT_ACCESS_SECRET) as JwtPayload;
     const { role, _id, iat } = decoded;
+
+    const isValidRole = userRole.includes(role);
+    console.log(isValidRole);
+    if (userRole && !isValidRole) {
+      throw new CError(501, "Access forbidden !");
+    }
+
+    console.log("ok");
+    console.log(decoded);
+    req.data = { jwtDU: decoded };
+    next();
   });
 };
 
