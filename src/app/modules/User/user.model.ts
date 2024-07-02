@@ -51,7 +51,9 @@ userSchema.methods.toJSON = function () {
 userSchema.statics.isPasswordMatched = async (plainPassword, hashPassword) => {
   return await bcrypt.compare(plainPassword, hashPassword);
 };
-
+userSchema.statics.isUserExist = async (id) => {
+  return await UserModel.findById(id);
+};
 const UserModel = model<TUser, IUserModel>("User", userSchema);
 
 export default UserModel;

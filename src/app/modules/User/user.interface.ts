@@ -17,6 +17,7 @@ interface IUserModel extends Model<TUser> {
     plainTextPassword: string,
     hashedPassword: string
   ): Promise<boolean>;
+  isUserExist(id: string): Promise<TUser>;
 }
 
 export { TUser, IUserModel, TUserRole };
