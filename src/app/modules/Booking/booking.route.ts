@@ -13,6 +13,6 @@ const bookingRouter = Router();
 bookingRouter.get("/", auth("admin"), fetchAllBookings);
 bookingRouter.get("/user", auth("user"), getUsersBookings);
 bookingRouter.post("/", auth("user"), calculateDurationHours, createBooking);
-bookingRouter.patch("/:id", cancelBookings);
+bookingRouter.patch("/:id", auth("user"), cancelBookings);
 
 export default bookingRouter;
