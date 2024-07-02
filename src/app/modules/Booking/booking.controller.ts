@@ -9,6 +9,8 @@ import {
   getUserBookingsDB,
 } from "./booking.service";
 
+const checkBookingAvailability = catchAsync(async (req, res, next) => {});
+
 const fetchAllBookings = catchAsync(async (req, res, next) => {
   const result = await fetchAllBookingsDB();
   sendRes({
@@ -58,4 +60,10 @@ const cancelBookings = catchAsync(async (req, res, next) => {
   });
 });
 
-export { createBooking, fetchAllBookings, cancelBookings, getUsersBookings };
+export {
+  createBooking,
+  fetchAllBookings,
+  cancelBookings,
+  getUsersBookings,
+  checkBookingAvailability,
+};

@@ -1,5 +1,6 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
 import CError from "../../error/CError";
+import catchAsync from "../../util/catchAsync/catchAsync";
 
 const convertTimeInHour = (time: string) => {
   const [hours, minutes] = time.split(":").map(parseFloat);
@@ -27,5 +28,9 @@ const calculateDurationHours = (
   };
   next();
 };
+
+const findAvailableTimeSlot = catchAsync(async() => {
+const totalTimeSlot = [{}]
+})
 
 export { calculateDurationHours };

@@ -55,10 +55,13 @@ const getUserBookingsDB = async (id: string) => {
   return result;
 };
 
+const checkBookingAvailabilityDB = async () => {};
+
 export {
   createBookingDB,
   calculatePayAbleAmountDB,
   fetchAllBookingsDB,
   cancelBookingsDB,
   getUserBookingsDB,
+  checkBookingAvailabilityDB,
 };
