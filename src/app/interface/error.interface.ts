@@ -1,9 +1,9 @@
 import { TErrorSources } from "../middlewares/globalErrorHandler/globalErrorHandler.interface";
 
-type TZodErrorResponds = {
+type THandleErrorResponds = {
   errorSources: TErrorSources;
   statusCode: number;
   message: string;
 };
 
-export { TErrorSources, TZodErrorResponds };
+export { THandleErrorResponds };
