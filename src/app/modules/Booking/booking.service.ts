@@ -1,5 +1,4 @@
 import CError from "../../error/CError";
-import TFacility from "../Facility/facility.interface";
 import FacilityModel from "../Facility/facility.model";
 import TBooking from "./booking.interface";
 import BookingModel from "./booking.model";
@@ -19,12 +18,13 @@ const calculatePayAbleAmountDB = async (id: string, duration: number) => {
 // create booking
 const createBookingDB = async (
   payload: TBooking,
-  totalPayableAmount: number
+  totalPayableAmount: number,
+  userId: string
 ) => {
   const result = BookingModel.create({
     ...payload,
     payableAmount: totalPayableAmount,
-    user: "667d90400b35955cc340374b",
+    user: userId,
   });
 
   return result;
@@ -50,9 +50,15 @@ const cancelBookingsDB = async (id: string) => {
   return result;
 };
 
+const getUserBookingsDB = async (id: string) => {
+  const result = await BookingModel.find({ user: id });
+  return result;
+};
+
 export {
   createBookingDB,
   calculatePayAbleAmountDB,
   fetchAllBookingsDB,
   cancelBookingsDB,
+  getUserBookingsDB,
 };

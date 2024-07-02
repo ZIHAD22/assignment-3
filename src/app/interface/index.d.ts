@@ -6,7 +6,7 @@ declare global {
     interface Request {
       data: {
         durationHours?: number;
-        jwtDU?: JwtPayload;
+        jwtDU?: JwtPayload | { _id: string; role: string };
       };
     }
   }

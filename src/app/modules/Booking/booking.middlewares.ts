@@ -22,6 +22,7 @@ const calculateDurationHours = (
   }
 
   req.data = {
+    ...req.data,
     durationHours,
   };
   next();
