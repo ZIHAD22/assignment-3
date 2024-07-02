@@ -19,4 +19,4 @@ if (NODE_ENV === "DEV") {
   prod_url = PROD_DB_URL;
 }
 
-export { PORT, prod_url, BCRYPT_SR, JWT_ACCESS_SECRET };
+export { PORT, prod_url, BCRYPT_SR, JWT_ACCESS_SECRET, NODE_ENV };

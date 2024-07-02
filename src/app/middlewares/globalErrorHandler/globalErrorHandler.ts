@@ -3,6 +3,7 @@ import CError from "../../error/CError";
 import { TErrorSources } from "./globalErrorHandler.interface";
 import { ZodError } from "zod";
 import handleZodError from "../../error/handleZodError";
+import { NODE_ENV } from "../../config";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.log(err);
@@ -49,6 +50,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     message: message,
     errorSources,
     error: err,
+    stack: NODE_ENV === "DEV" ? err?.stack : null,
   });
 };
 
