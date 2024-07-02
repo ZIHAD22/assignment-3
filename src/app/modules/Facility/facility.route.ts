@@ -6,7 +6,10 @@ import {
   updateFacility,
 } from "./facility.controller";
 import validateRequest from "../../middlewares/validateRequest";
-import { createFacilityValidation } from "./facility.validation";
+import {
+  createFacilityValidation,
+  updateFacilityValidation,
+} from "./facility.validation";
 
 const facilityRouter = Router();
 
@@ -16,7 +19,11 @@ facilityRouter.post(
   validateRequest(createFacilityValidation),
   createFacility
 );
-facilityRouter.patch("/:_id", updateFacility);
+facilityRouter.patch(
+  "/:_id",
+  validateRequest(updateFacilityValidation),
+  updateFacility
+);
 facilityRouter.patch("/delete/:id", deleteFacility);
 
 export default facilityRouter;

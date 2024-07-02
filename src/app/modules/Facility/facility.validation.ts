@@ -9,4 +9,13 @@ const createFacilityValidation = z.object({
   }),
 });
 
-export { createFacilityValidation };
+const updateFacilityValidation = z.object({
+  body: z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    location: z.string().optional(),
+    pricePerHour: z.number().optional(),
+  }),
+});
+
+export { createFacilityValidation, updateFacilityValidation };
