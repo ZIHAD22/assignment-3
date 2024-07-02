@@ -30,7 +30,7 @@ const auth = (...userRole: TUserRole[]): RequestHandler => {
 
     console.log(decoded);
     req.data = { jwtDU: decoded };
-    next();
+    return next();
   });
 };
 

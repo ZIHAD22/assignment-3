@@ -1,8 +1,11 @@
 import { ErrorRequestHandler } from "express";
 import CError from "../../error/CError";
 import { TErrorSources } from "./globalErrorHandler.interface";
+import { ZodError } from "zod";
+import handleZodError from "../../error/handleZodError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  console.log(err);
   let statusCode = 500;
   let message = err.message ? err.message : "Something went wrong!";
   let errorSources: TErrorSources = [
@@ -33,14 +36,19 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
         message: err?.message,
       },
     ];
+  } else if (err instanceof ZodError) {
+    const modifyErrorData = handleZodError(err);
+    statusCode = modifyErrorData.statusCode;
+    errorSources = modifyErrorData.errorSources;
+    message = modifyErrorData.message;
   }
 
   return res.json({
     success: false,
     statusCode: statusCode,
     message: message,
-    error: err,
     errorSources,
+    error: err,
   });
 };
 
