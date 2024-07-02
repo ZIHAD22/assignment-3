@@ -4,6 +4,8 @@ import TModuleRouters from "./index.interface";
 import facilityRouter from "../modules/Facility/facility.route";
 import bookingRouter from "../modules/Booking/booking.route";
 import auth from "../middlewares/Auth/auth";
+import { checkBookingAvailability } from "../modules/checkBookingAvailability/checkBookingAvailability.controller";
+import checkBookingAvailabilityRouter from "../modules/checkBookingAvailability/checkBookingAvailability.route";
 
 const router = Router();
 
@@ -20,6 +22,10 @@ const moduleRoutes: TModuleRouters = [
   {
     path: "/bookings",
     route: bookingRouter,
+  },
+  {
+    path: "/check-availability",
+    route: checkBookingAvailabilityRouter,
   },
 ];
 
