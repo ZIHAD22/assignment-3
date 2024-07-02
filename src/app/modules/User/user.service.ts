@@ -32,7 +32,7 @@ const loginUserDB = async (payload: { email: string; password: string }) => {
     role: userData?.role,
   };
 
-  const token = jwt.sign(jwtPayload, JWT_ACCESS_SECRET, { expiresIn: "2d" });
+  const token = jwt.sign(jwtPayload, JWT_ACCESS_SECRET, { expiresIn: "10d" });
 
   return { token, userData };
 };

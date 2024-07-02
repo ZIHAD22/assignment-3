@@ -5,11 +5,12 @@ import {
   fetchAllBookings,
 } from "./booking.controller";
 import { calculateDurationHours } from "./booking.middlewares";
+import auth from "../../middlewares/Auth/auth";
 
 const bookingRouter = Router();
 
-bookingRouter.get("/", fetchAllBookings);
-bookingRouter.post("/", calculateDurationHours, createBooking);
+bookingRouter.get("/", auth("admin"), fetchAllBookings);
+bookingRouter.post("/", auth("user"), calculateDurationHours, createBooking);
 bookingRouter.patch("/:id", cancelBookings);
 
 export default bookingRouter;

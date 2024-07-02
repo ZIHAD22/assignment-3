@@ -2,8 +2,9 @@ import bcrypt from "bcrypt";
 import { Schema, model } from "mongoose";
 import { BCRYPT_SR } from "../../config";
 import { IUserModel, TUser } from "./user.interface";
+import CError from "../../error/CError";
 
-const userSchema = new Schema<TUser>(
+const userSchema = new Schema<TUser, IUserModel>(
   {
     name: {
       type: String,
@@ -12,6 +13,7 @@ const userSchema = new Schema<TUser>(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -38,6 +40,10 @@ const userSchema = new Schema<TUser>(
 
 userSchema.pre("save", async function (next) {
   const user = this;
+  const isValidUser = await UserModel.findOne({ email: user.email });
+  if (isValidUser) {
+    throw new CError(501, "User is Already Exist");
+  }
   user.password = await bcrypt.hash(user.password, Number(BCRYPT_SR));
   next();
 });

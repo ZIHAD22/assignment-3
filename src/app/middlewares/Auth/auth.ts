@@ -9,6 +9,7 @@ import UserModel from "../../modules/User/user.model";
 const auth = (...userRole: TUserRole[]): RequestHandler => {
   return catchAsync(async (req, res, next) => {
     const token = req.headers.authorization;
+
     if (!token) {
       throw new CError(501, "Access forbidden !");
     }
@@ -27,7 +28,6 @@ const auth = (...userRole: TUserRole[]): RequestHandler => {
       throw new CError(501, "Access forbidden !");
     }
 
-    console.log("ok");
     console.log(decoded);
     req.data = { jwtDU: decoded };
     next();
