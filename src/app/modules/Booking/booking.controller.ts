@@ -1,3 +1,4 @@
+import CError from "../../error/CError";
 import catchAsync from "../../util/catchAsync/catchAsync";
 import sendRes from "../../util/sendRes/sendRes";
 import UserModel from "../User/user.model";
@@ -51,6 +52,9 @@ const createBooking = catchAsync(async (req, res, next) => {
 const cancelBookings = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const result = await cancelBookingsDB(id);
+  if (!result) {
+    throw new CError(404, "Booking Not Found");
+  }
   sendRes({
     res,
     message: "Booking cancelled successfully",
