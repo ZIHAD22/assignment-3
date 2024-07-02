@@ -1,5 +1,6 @@
 import { Schema, Types, model } from "mongoose";
 import TBooking from "./booking.interface";
+import CError from "../../error/CError";
 
 const bookingSchema = new Schema<TBooking>(
   {
@@ -37,6 +38,18 @@ const bookingSchema = new Schema<TBooking>(
   },
   { timestamps: true }
 );
+
+bookingSchema.pre("save", async function (next) {
+  const data = this;
+  const result = await BookingModel.findOne({
+    date: data?.date,
+    startTime: data?.startTime,
+    endTime: data?.endTime,
+  }).select("startTime endTime -_id");
+  if (result) {
+    throw new CError(501, "Facility Not Available At This Time");
+  }
+});
 
 const BookingModel = model<TBooking>("Booking", bookingSchema);
 
