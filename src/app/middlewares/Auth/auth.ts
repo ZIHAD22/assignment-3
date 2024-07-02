@@ -23,12 +23,10 @@ const auth = (...userRole: TUserRole[]): RequestHandler => {
     }
 
     const isValidRole = userRole.includes(role);
-    console.log(isValidRole);
     if (userRole && !isValidRole) {
       throw new CError(501, "Access forbidden !");
     }
 
-    console.log(decoded);
     req.data = { jwtDU: decoded };
     return next();
   });

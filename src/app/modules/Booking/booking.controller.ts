@@ -33,7 +33,6 @@ const getUsersBookings = catchAsync(async (req, res, next) => {
 
 const createBooking = catchAsync(async (req, res, next) => {
   const data = req.body;
-  console.log(data);
   const { durationHours, jwtDU } = req.data;
 
   const totalPayableAmount = await calculatePayAbleAmountDB(

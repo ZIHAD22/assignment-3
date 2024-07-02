@@ -20,7 +20,6 @@ const updateFacilityDB = async (payload: any) => {
       runValidators: true,
     }
   );
-  console.log(result);
   return result;
 };
 
