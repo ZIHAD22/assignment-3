@@ -1,3 +1,4 @@
+import CError from "../../error/CError";
 import catchAsync from "../../util/catchAsync/catchAsync";
 import sendRes from "../../util/sendRes/sendRes";
 import {
@@ -22,6 +23,7 @@ const createFacility = catchAsync(async (req, res, next) => {
   const data = req.body;
 
   const result = await createFacilityDB(data);
+
   sendRes({
     res,
     message: "Facility Created Successfully",
@@ -34,6 +36,9 @@ const updateFacility = catchAsync(async (req, res, next) => {
   const { _id } = req.params;
   const data = req.body;
   const result = await updateFacilityDB({ _id, data });
+  if (!result) {
+    throw new CError(404, "Facility Not Found");
+  }
   sendRes({
     res,
     message: "Facility Updated Successfully",
