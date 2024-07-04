@@ -27,6 +27,7 @@ const deleteFacilityDB = async (payload: string) => {
   const result = await FacilityModel.findByIdAndUpdate(payload, {
     isDeleted: true,
   });
+  return result;
 };
 
 export {

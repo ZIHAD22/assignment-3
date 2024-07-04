@@ -50,6 +50,9 @@ const updateFacility = catchAsync(async (req, res, next) => {
 const deleteFacility = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const result = await deleteFacilityDB(id);
+  if (!result) {
+    throw new CError(404, "Facility Not Found");
+  }
   sendRes({
     res,
     message: "Facility Deleted Successfully",
